@@ -3,6 +3,7 @@ const { joiPasswordExtendCore } = require("joi-password");
 joi.objectid = require("joi-objectid");
 const joiPassword = joi.extend(joiPasswordExtendCore);
 
+// Validations for registration route
 const userRegistrationSchema = joi.object({
   firstName: joi.string().trim().required(),
   lastName: joi.string().trim().required(),
@@ -17,10 +18,27 @@ const userRegistrationSchema = joi.object({
     .minOfUppercase(1)
     .minOfNumeric(1)
     .noWhiteSpaces()
-    .required(),
+    .required(), // password can have a minlength of 8 and maxlength of 16, must contain atleast one [special, lowercase, uppercase, numeric] character
   receiveMails: joi.bool().default(false),
+});
+
+// Validation for login route
+const userLoginSchema = joi.object({
+  email: joi.string().trim().email().lowercase().required(),
+  password: joiPassword
+    .string()
+    .trim()
+    .min(8)
+    .max(16)
+    .minOfSpecialCharacters(1)
+    .minOfLowercase(1)
+    .minOfUppercase(1)
+    .minOfNumeric(1)
+    .noWhiteSpaces()
+    .required(), // same as above
 });
 
 module.exports = {
   userRegistrationSchema,
+  userLoginSchema,
 };
