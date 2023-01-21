@@ -10,7 +10,7 @@ const moment = require("moment");
 // Access token which should be stored in client to authorize user (expires in 1 hour)
 const generateAccessToken = (user) => {
   return jwt.sign({ userId: user._id }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "1h",
+    expiresIn: 1800,
   });
 };
 
@@ -23,6 +23,7 @@ const generateRefreshToken = async (user) => {
       expiresIn: "1d",
     }
   );
+  // while signing and creating a refresh token also save it in our db so that we can further use it to rotate access tokens
   await RefreshToken.create({ userId: user._id, refreshToken: token }).catch(
     (error) => {
       throw httpErrors.InternalServerError(
@@ -75,7 +76,7 @@ const registerUser = asyncHandler(async (req, res) => {
       res.status(500).send({
         error: true,
         data: {
-          message: "Something went wrong while creating user",
+          message: "Something went wrong while registering user",
         },
       });
     }
@@ -148,27 +149,29 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+// METHOD: POST
+// ROUTE: /auth/refresh
 const rotateToken = asyncHandler(async (req, res) => {
   try {
-    const refreshToken = req.signedCookies?.refresh_token;
-    const token = await RefreshToken.findOne({ refreshToken: refreshToken });
+    const refreshToken = req.signedCookies?.refresh_token; // get the refresh_token sent by the client
+    const token = await RefreshToken.findOne({ refreshToken: refreshToken }); // check if such token exists in our DB
     if (!token) {
       res.status(400);
-      throw httpErrors.BadRequest("Invalid refresh token");
+      throw httpErrors.BadRequest("Invalid refresh token"); // throw error if token does not exist in our DB
     }
     const verifyToken = jwt.verify(
       refreshToken,
-      process.env.REFRESH_TOKEN_SECRET
+      process.env.REFRESH_TOKEN_SECRET // Verify the refresh token
     );
-    const userId = verifyToken.userId;
-    const user = await User.findById(userId);
+    const userId = verifyToken.userId; // get the userId from the refresh token
+    const user = await User.findById(userId); // check if a user with that id exists, if not throw an error
     if (!user) {
       res.status(400);
       throw httpErrors.BadRequest("Invalid refresh token");
     }
-    const access_token = generateAccessToken(user);
+    const access_token = generateAccessToken(user); // create new access and refresh token
     const refresh_token = await generateRefreshToken(user);
-    await token.delete(); // delete the old refresh token
+    await token.delete(); // delete the old refresh token so that it cannot be used again by anyone
     res
       .cookie("refresh_token", refresh_token, {
         secure: process.env.NODE_ENV == "production",
