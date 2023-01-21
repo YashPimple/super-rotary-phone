@@ -6,7 +6,9 @@ const httpErrors = require("http-errors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const moment = require("moment");
-const { calculateBMI } = require("../helpers/calc_functions/calculations");
+const {
+  calculateBMI,
+} = require("../helpers/calc_functions/calculations.helper");
 
 // Access token which should be stored in client to authorize user (expires in 1 hour)
 const generateAccessToken = (user) => {
