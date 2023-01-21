@@ -20,6 +20,8 @@ const userRegistrationSchema = joi.object({
     .noWhiteSpaces()
     .required(), // password can have a minlength of 8 and maxlength of 16, must contain atleast one [special, lowercase, uppercase, numeric] character
   receiveMails: joi.bool().default(false),
+  weight: joi.number().min(1).max(635).required(),
+  height: joi.number().min(65.24).max(251).required(),
 });
 
 // Validation for login route

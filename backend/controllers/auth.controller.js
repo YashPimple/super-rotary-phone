@@ -6,6 +6,7 @@ const httpErrors = require("http-errors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const moment = require("moment");
+const { calculateBMI } = require("../helpers/calc_functions/calculations");
 
 // Access token which should be stored in client to authorize user (expires in 1 hour)
 const generateAccessToken = (user) => {
@@ -51,6 +52,8 @@ const registerUser = asyncHandler(async (req, res) => {
     // hash password to save in DB
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(userDetails.password, salt);
+    // calculate BMI(Body Mass Index)
+    const bmi = calculateBMI(userDetails.height, userDetails.weight);
     // Create new user
     const user = await User.create({
       firstName: userDetails.firstName,
@@ -58,6 +61,9 @@ const registerUser = asyncHandler(async (req, res) => {
       email: userDetails.email,
       password: hashedPassword,
       receiveMails: userDetails.receiveMails,
+      weight: userDetails.weight,
+      height: userDetails.height,
+      bmi: bmi,
     });
     if (user) {
       res.status(201).send({
@@ -68,6 +74,9 @@ const registerUser = asyncHandler(async (req, res) => {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            height: user.height,
+            weight: user.weight,
+            bmi: user.bmi,
           },
           message: "User created successfully",
         },

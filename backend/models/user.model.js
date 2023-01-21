@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const { calculateBMI } = require("../helpers/calc_functions/calculations");
 
 const userSchema = new mongoose.Schema(
   {
@@ -22,6 +24,17 @@ const userSchema = new mongoose.Schema(
     receiveMails: {
       type: Boolean,
       default: false,
+    },
+    weight: {
+      type: Number,
+      required: [true, "Weight is required"],
+    },
+    height: {
+      type: Number,
+      required: [true, "Height is required"],
+    },
+    bmi: {
+      type: Number,
     },
   },
   {
