@@ -1,9 +1,10 @@
+const authValidation = require("../helpers/joi_validation/auth.validation_schema");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user.model");
+const RefreshToken = require("../models/token.model");
+const httpErrors = require("http-errors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const authValidation = require("../helpers/joi_validation/auth.validation_schema");
-const httpErrors = require("http-errors");
 const moment = require("moment");
 
 // Access token which should be stored in client to authorize user (expires in 1 hour)
@@ -13,11 +14,23 @@ const generateAccessToken = (user) => {
   });
 };
 
-// Refresh token which should be stored in client to refresh/rotate access token (expires in 1 day)
-const generateRefreshToken = (user) => {
-  return jwt.sign({ userId: user._id }, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: "1d",
-  });
+// refresh_token which should be stored in client to refresh/rotate access_token (expires in 1 day)
+const generateRefreshToken = async (user) => {
+  const token = jwt.sign(
+    { userId: user._id },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: "1d",
+    }
+  );
+  await RefreshToken.create({ userId: user._id, refreshToken: token }).catch(
+    (error) => {
+      throw httpErrors.InternalServerError(
+        "An error occured while saving refresh token to MongoDB Server"
+      );
+    }
+  );
+  return token;
 };
 
 // METHOD: POST
@@ -90,13 +103,13 @@ const loginUser = asyncHandler(async (req, res) => {
     const user = await User.findOne({ email: userDetails.email });
     if (!user) {
       res.status(404);
-      throw httpErrors.Forbidden(
+      throw httpErrors.NotFound(
         "User not found, Please check your Email and try again"
       );
     }
     if (await bcrypt.compare(userDetails.password, user.password)) {
       const access_token = generateAccessToken(user);
-      const refresh_token = generateRefreshToken(user);
+      const refresh_token = await generateRefreshToken(user);
       res
         .cookie("refresh_token", refresh_token, {
           secure: process.env.NODE_ENV == "production",
@@ -104,7 +117,7 @@ const loginUser = asyncHandler(async (req, res) => {
           httpOnly: true,
           sameSite: true,
           expires: new Date(moment().endOf("day")),
-        }) // send refresh token as cookie which is http only and access token along with the response
+        }) // send refresh_token as cookie which is http only and access_token along with the response body
         .send({
           error: false,
           data: {
@@ -135,7 +148,63 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+const rotateToken = asyncHandler(async (req, res) => {
+  try {
+    const refreshToken = req.signedCookies?.refresh_token;
+    const token = await RefreshToken.findOne({ refreshToken: refreshToken });
+    if (!token) {
+      res.status(400);
+      throw httpErrors.BadRequest("Invalid refresh token");
+    }
+    const verifyToken = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+    const userId = verifyToken.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      res.status(400);
+      throw httpErrors.BadRequest("Invalid refresh token");
+    }
+    const access_token = generateAccessToken(user);
+    const refresh_token = await generateRefreshToken(user);
+    await token.delete(); // delete the old refresh token
+    res
+      .cookie("refresh_token", refresh_token, {
+        secure: process.env.NODE_ENV == "production",
+        signed: true,
+        httpOnly: true,
+        sameSite: true,
+        expires: new Date(moment().endOf("day")),
+      }) // send newly created refresh_token as cookie which is http only and access_token along with the response body
+      .send({
+        error: false,
+        data: {
+          access_token,
+          userDetails: {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+          },
+        },
+      });
+  } catch (error) {
+    let errorObj = {
+      error: true,
+      data: {
+        message: error.message,
+      },
+    };
+    if (error?.isJoi) {
+      res.status(422); // same as above
+    }
+    res.send(errorObj);
+  }
+});
+
 module.exports = {
   registerUser,
   loginUser,
+  rotateToken,
 };

@@ -12,7 +12,7 @@ const protectedRoute = asyncHandler(async (req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1]; // Access the token
       const verifyJWT = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-      req.user = await User.findById(verifyJWT._id).select("-password");
+      req.user = await User.findById(verifyJWT.userId).select("-password");
       next();
     } catch (error) {
       throw httpErrors.Unauthorized("Request not authorized");
