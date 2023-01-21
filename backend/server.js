@@ -19,5 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // auth route
 app.use("/auth", require("./routes/auth.route"));
+app.use("/test", require("./routes/test.route"));
 
 app.listen(PORT, () => console.log(`Application running on port ${PORT}`));
