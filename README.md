@@ -1,6 +1,6 @@
 # NourishNet
 
-# Link to our Video : https://www.youtube.com/watch?v=QzLrgM54Lg4
+### Link to our Video : https://www.youtube.com/watch?v=QzLrgM54Lg4
 
 ## Inspiration
 NourishNet is a website which is inspired by daily Fitness freaks who face issues regarding calorie tracking and having a healthy diet. So here we come up with a solution to provide a medium where users can track their calories along with providing them with the latest information and resources on health and wellness.
