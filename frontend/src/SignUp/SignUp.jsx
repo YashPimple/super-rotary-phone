@@ -8,7 +8,7 @@ const SignUp = () => {
  async function registerRequest() {
     // if(validateUserData()){
       delete user.passwordConfirmation;
-     await axios.post("http://localhost:5000/auth/register", user).then(response => {
+     await axios.post("https://nourishnet-backend.onrender.com/auth/register", user).then(response => {
       if(!response.data.error) {
 
         navigate('/signin')

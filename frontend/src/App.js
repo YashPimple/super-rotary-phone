@@ -46,14 +46,14 @@ function App() {
   const [mealPlan, setMealPlan] = useState([])
 
   async function addMeal(name, img, calories, protein, fat, carb, url, type) {
-    await axios.post("http://localhost:5000/diet/add-diet", { name, img, calories, protein, carb, fat, url, type }).then(res => {
+    await axios.post("https://nourishnet-backend.onrender.com/diet/add-diet", { name, img, calories, protein, carb, fat, url, type }).then(res => {
       setMealPlan([...mealPlan, { name, img, calories, protein, carb, fat, url, type, _id: res.data.data.dietDetails._id }]);
     })
   }
 
   async function removeMeal(name) {
     const userId = JSON.parse(localStorage.getItem('userDetails'))._id
-    await axios.delete(`http://localhost:5000/diet/delete-diet`, {data: {name}} ).then(res => {
+    await axios.delete(`https://nourishnet-backend.onrender.com/diet/delete-diet`, {data: {name}} ).then(res => {
     if(!res.data.error) 
       setMealPlan(mealPlan.filter(meal => meal.name !== name))
     }).catch(err => alert(err))

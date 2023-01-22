@@ -9,13 +9,13 @@ const {mealPlan} = useContext(mealContext);
 const [diets, setDiets] = useState([]);
 
 useEffect(() => {
-    axios.post("http://localhost:5000/diet/get-diets", {}).then((res) => {
+    axios.post("https://nourishnet-backend.onrender.com/diet/get-diets", {}).then((res) => {
         setDiets(res.data.data.dietDetails)
     });
 }, [diets])
 
 useEffect(() => {
-    axios.post("http://localhost:5000/diet/get-diets", {}).then((res) => {
+    axios.post("https://nourishnet-backend.onrender.com/diet/get-diets", {}).then((res) => {
         setDiets(res.data.data.dietDetails)
     });
 }, [])

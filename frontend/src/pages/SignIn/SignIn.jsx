@@ -14,7 +14,7 @@ const Signin = () => {
       alert("Please fill out all fields")
       return;
     }
-    await axios.post("http://localhost:5000/auth/login", {email, password}).then(response => { 
+    await axios.post("https://nourishnet-backend.onrender.com/auth/login", {email, password}).then(response => { 
         if(!response.data.error) {
             localStorage.setItem("token", response.data.data.access_token)
             localStorage.setItem("userDetails", JSON.stringify(response.data.data.userDetails));
