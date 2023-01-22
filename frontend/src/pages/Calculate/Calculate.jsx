@@ -20,7 +20,6 @@ const Calculate = () => {
     
   }
 
-  console.log(totalCalories, totalProtein, totalCarb, totalFat);
 
   const bmr = Math.floor(JSON.parse(localStorage.getItem('userDetails')).bmr) ;
   const weight = Math.floor(JSON.parse(localStorage.getItem('userDetails')).weight) ;

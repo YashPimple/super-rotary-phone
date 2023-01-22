@@ -4,31 +4,31 @@ import { Link } from 'react-router-dom'
 const Homepage = () => {
   return ( <>
     
-    <section class="bg-white">
-  <div class="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-    <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-xl font-bold text-green-600 sm:text-4xl">
+    <section className="bg-white mt-20">
+  <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+    <div className="mx-auto max-w-3xl text-center">
+      <h2 className="text-xl font-bold text-green-600 sm:text-4xl">
         Welcome to NourishNet
       </h2>
 
-      <p class="mt-4 text-gray-500 sm:text-xl ">
+      <p className="mt-4 text-gray-500 sm:text-xl ">
       We focus on providing you with the latest information and resources on health and wellness.
       We believe in the power of knowledge and education when it comes to maintaining a healthy lifestyle. 
       </p>
     </div>
 
-    <div class="mt-8 sm:mt-18">
-      <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div className="mt-8 sm:mt-18">
+      <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
        <Link to='/blogs'>
         <div
-          class="flex flex-col h-96 rounded-lg border border-gray-200 px-4 py-8 text-center"
+          className="flex flex-col h-96 rounded-lg border border-gray-200 px-4 py-8 text-center"
         >
-          <dt class="order-last text-lg font-medium text-gray-500">
+          <dt className="order-last text-lg font-medium text-gray-500">
           <img className='h-30 w-30 ml-5 px-20 ' src='https://img.freepik.com/free-vector/blog-post-concept-illustration_114360-244.jpg?size=338&ext=jpg&ga=GA1.2.53141830.1657365930&semt=sph' />
           Discover new perspectives,insights and expand your knowledge through our blog
           </dt>
 
-          <dd class="text-4xl font-extrabold text-green-600 lg:text-xl md:text-2xl">
+          <dd className="text-4xl font-extrabold text-green-600 lg:text-xl md:text-2xl">
           
           Healthline Nutrition
           </dd>
@@ -37,14 +37,14 @@ const Homepage = () => {
 
         <Link to='/calculate'>
         <div
-          class="flex flex-col h-96 rounded-lg border border-gray-200 px-4 py-8 text-center"
+          className="flex flex-col h-96 rounded-lg border border-gray-200 px-4 py-8 text-center"
         >
-          <dt class="order-last text-lg font-medium text-gray-500">
+          <dt className="order-last text-lg font-medium text-gray-500">
           <img className='h-30 w-30 ml-5 px-20 ' src='https://img.freepik.com/free-vector/healthy-habit-concept-illustration_114360-1132.jpg?w=1380&t=st=1674367732~exp=1674368332~hmac=4221590ef3569eaf964b5ca2f7116400f7a1571562170378428777b29d345bb9' />
           Calculate Your Intake
           </dt>
 
-          <dd class="text-4xl font-extrabold text-green-600 lg:text-xl md:text-2xl">
+          <dd className="text-4xl font-extrabold text-green-600 lg:text-xl md:text-2xl">
           Your Daily Summary
           </dd>
         </div>
@@ -52,15 +52,15 @@ const Homepage = () => {
 
         <Link to="/yoga">
       <div
-          class="flex flex-col h-96 rounded-lg border border-gray-200 px-4 py-8 text-center"
+          className="flex flex-col h-96 rounded-lg border border-gray-200 px-4 py-8 text-center"
         >
-          <dt class="order-last text-lg font-medium text-gray-500">
+          <dt className="order-last text-lg font-medium text-gray-500">
           <img className='h-30 w-30  ml-5 px-24 ' src='https://img.freepik.com/premium-vector/watercolor-international-day-yoga_23-2148563116.jpg?w=1380' />
           Strengthen your body and mind.
           
           </dt>
 
-          <dd class="text-4xl font-extrabold text-green-600 lg:text-xl md:text-2xl">
+          <dd className="text-4xl font-extrabold text-green-600 lg:text-xl md:text-2xl">
           Yoga: Mind, Body, Harmony
           </dd>
           
@@ -84,7 +84,7 @@ const Homepage = () => {
         />
       </div>
 
-      <div class="lg:py-24">
+      <div className="lg:py-24">
         <h2 className="text-3xl font-bold sm:text-4xl">Are You Eating Enough Protien?</h2>
 
         <p className="mt-4 text-gray-600">

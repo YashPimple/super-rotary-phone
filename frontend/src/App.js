@@ -19,7 +19,9 @@ import SignUp from "./SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import SharedLayout from "./pages/SharedLayout";
 import RouteGuard from "./components/RouteGuard";
+import Yoga from "./pages/Yoga";
 import axios from "axios";
+import About from "./pages/About";
 
 export const mealContext = React.createContext()
 
@@ -45,15 +47,12 @@ function App() {
 
   async function addMeal(name, img, calories, protein, fat, carb, url, type) {
     await axios.post("http://localhost:5000/diet/add-diet", { name, img, calories, protein, carb, fat, url, type }).then(res => {
-      console.log(res);
-      // url kya hai
       setMealPlan([...mealPlan, { name, img, calories, protein, carb, fat, url, type, _id: res.data.data.dietDetails._id }]);
     })
   }
 
   async function removeMeal(name) {
     const userId = JSON.parse(localStorage.getItem('userDetails'))._id
-    // console.log(_id)
     await axios.delete(`http://localhost:5000/diet/delete-diet`, {data: {name}} ).then(res => {
     if(!res.data.error) 
       setMealPlan(mealPlan.filter(meal => meal.name !== name))
@@ -73,6 +72,8 @@ function App() {
       
       
       <Route path="/calculate/breakfast" element={<RouteGuard Component={Breakfast} />} />
+      <Route path="/yoga" element={<RouteGuard Component={Yoga} />} />
+      <Route path="/about" element={<RouteGuard Component={About} />} />
 
       <Route path="/calculate/lunch" element={<RouteGuard Component={Lunch} />} />
       

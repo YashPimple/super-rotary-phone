@@ -15,7 +15,6 @@ const Lunch = () => {
             .then(res => {
                 setOutput(res.data.hits);
                 setInput("")
-                console.log(res.data.hits);
             })
             .catch(err => {
                 console.log(err);

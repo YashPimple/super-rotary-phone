@@ -10,13 +10,14 @@ const SignUp = () => {
       delete user.passwordConfirmation;
      await axios.post("http://localhost:5000/auth/register", user).then(response => {
       if(!response.data.error) {
+
         navigate('/signin')
         }
       })
     // }
   }
 
-  function validateUserData(e) {
+  async function validateUserData(e) {
     e.preventDefault()
     if (!user.firstName || !user.lastName || !user.email || !user.password || !user.passwordConfirmation || !user.weight || !user.height || !user.age) {
       alert('Please fill out all fields')
@@ -28,12 +29,11 @@ const SignUp = () => {
     }
   
       if ((/"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/.test(user.password))) {
-        console.log((/"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/.test(user.password)))
         alert("Password must contain atleast one uppercase character, one lowercase character, one number and one special character!")
         return;
       }
 
-      registerRequest()
+      await registerRequest()
     
   }
 

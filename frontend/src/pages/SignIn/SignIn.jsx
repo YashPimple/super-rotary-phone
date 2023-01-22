@@ -20,7 +20,7 @@ const Signin = () => {
             localStorage.setItem("userDetails", JSON.stringify(response.data.data.userDetails));
             navigate("/");
         }   
-    }).then(data => console.log(data)).catch(err => alert(err.response.data.data.message))
+    }).then(data => {}).catch(err => alert(err.response.data.data.message))
   }
   
   return (

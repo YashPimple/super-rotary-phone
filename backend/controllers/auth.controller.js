@@ -44,7 +44,6 @@ const registerUser = asyncHandler(async (req, res) => {
     // Validate user schema
     const userDetails =
       await authValidation.userRegistrationSchema.validateAsync(req.body);
-
     // Check if user already exists
     const userExists = await User.find({ email: userDetails.email });
     if (userExists?.length) {

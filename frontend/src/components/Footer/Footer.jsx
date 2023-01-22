@@ -26,31 +26,31 @@ const Footer = () => {
             >
            Empowering you to achieve optimal health and wealth
         </p>
-        <div class="mt-12 lg:mt-0">
+        <div className="mt-12 lg:mt-0">
         <ul
-          class="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12"
+          className="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12"
         >
           <li>
-            <a class="text-white transition hover:text-green-800 font-bold" href="/about">
+            <a className="text-white transition hover:text-green-800 font-bold" href="/about">
               About
             </a>
           </li>
 
           <li>
-            <a class="text-white transition hover:text-green-800 font-bold" href="/blogs">
+            <a className="text-white transition hover:text-green-800 font-bold" href="/blogs">
               Blogs
             </a>
           </li>
 
           <li>
-            <a class="text-white transition hover:text-green-800 font-bold" href="/yoga">
+            <a className="text-white transition hover:text-green-800 font-bold" href="/yoga">
               Mindfulness Practice
             </a>
           </li>
         </ul>
       </div>
     </div>
-        <p class="mt-12 text-center text-sm text-white lg:text-right font-semibold">
+        <p className="mt-12 text-center text-sm text-white lg:text-right font-semibold">
         Copyright &copy; 2022. All rights reserved.
     </p>
      </div>

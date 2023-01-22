@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const [open, setOpen] = useState(false);
 
-  const navName = ['Home', 'calculate', 'blogs', 'about', 'contact', 'logout'];
+  const navName = ['Home', 'calculate', 'blogs', 'about', 'logout'];
 
   return (
     <div className="shadow-md w-full fixed top-0 left-0 z-10 ">
