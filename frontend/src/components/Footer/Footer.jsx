@@ -3,33 +3,63 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-     <div className='main relative h-60 overflow-hidden bg-white dark:bg-green-700'>
-       <div className='header z-30 flex items-center w-full h-24 sm:h-32 mt-4 px-12'>
-        <div className='items-center px-6 py-2 text-white font-sen'>
-                  <h1 className='flex mt-2 text-3xl font-semibold'>
-                      About
-                    </h1>
-                    <p className=' mt-2'>
-                    is simply dummy text of the printing and typesetting industry. 
-                    </p>
-               </div>
-               <div className='items-center px-6 py-2 text-white font-sen '>
-                  <h1 className='flex mt-2 text-3xl font-semibold'>
-                      Contact
-                    </h1>
-                    <p className=' mt-2 '>
-                    is simply dummy text of the printing and typesetting industry. 
-                    </p>
-               </div>
-                  
-               
-            
-       </div>
+     <div className='bg-gray-100 dark:bg-green-600 h-64'>
+        <div className='relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24'>
+            <div className='absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8'>
+            <Link
+                      className="inline-block rounded-full bg-green p-2 text-white shadow transition hover:bg-green-800 sm:p-3 lg:p-4"
+                      to="/"
+                    >
+                      
+
+            </Link>
+        </div>
+
+        <div className='lg:flex lg:items-end lg:justify-between'>
+           <div className='flex justify-center text-teal-600 lg:justify-start'>
+                <div className='text-3xl font-black text-gray-800 uppercase dark:text-white'> 
+                 <Link to='/'>NOURISH.NET</Link> 
+                </div>
+           </div>
+           <p
+            className="mx-auto mt-6 max-w-md text-center leading-relaxed text-white lg:text-left font-semibold"
+            >
+           Empowering you to achieve optimal health and wealth
+        </p>
+        <div class="mt-12 lg:mt-0">
+        <ul
+          class="flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12"
+        >
+          <li>
+            <a class="text-white transition hover:text-green-800 font-bold" href="/about">
+              About
+            </a>
+          </li>
+
+          <li>
+            <a class="text-white transition hover:text-green-800 font-bold" href="/blogs">
+              Blogs
+            </a>
+          </li>
+
+          <li>
+            <a class="text-white transition hover:text-green-800 font-bold" href="/yoga">
+              Mindfulness Practice
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+        <p class="mt-12 text-center text-sm text-white lg:text-right font-semibold">
+        Copyright &copy; 2022. All rights reserved.
+    </p>
+     </div>
     </div> 
   )
 }
 
 export default Footer
+
 
 
 
