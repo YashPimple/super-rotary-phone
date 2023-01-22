@@ -52,10 +52,10 @@ const Homepage = () => {
 
         <Link to="/yoga">
       <div
-          class="flex flex-col h-96 rounded-lg border overflow-auto border-gray-200 px-4 py-8 text-center"
+          class="flex flex-col h-96 rounded-lg border border-gray-200 px-4 py-8 text-center"
         >
           <dt class="order-last text-lg font-medium text-gray-500">
-          <img className='h-30 w-30  ml-5 px-20 ' src='https://img.freepik.com/premium-vector/watercolor-international-day-yoga_23-2148563116.jpg?w=1380' />
+          <img className='h-30 w-30  ml-5 px-24 ' src='https://img.freepik.com/premium-vector/watercolor-international-day-yoga_23-2148563116.jpg?w=1380' />
           Strengthen your body and mind.
           
           </dt>
