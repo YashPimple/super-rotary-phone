@@ -19,7 +19,7 @@ import SignUp from "./SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import SharedLayout from "./pages/SharedLayout";
 import RouteGuard from "./components/RouteGuard";
-import Yoga from "./pages/Yoga";
+import Yoga from "./pages/yoga";
 import axios from "axios";
 import About from "./pages/About";
 
