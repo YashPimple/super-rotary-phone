@@ -24,3 +24,22 @@ Learned how to use netlify (for hosting), MongoDB for the backend, express.js, a
 
 ## What's next for NourishNet
 In terms of features, we aspire to add other functionality having tips for managing stress and improving mental health along with having a separate section on forums and online communities where users can connect with others and share information.
+
+![Colourful Food Nutrients Guide Landscape Poster](https://user-images.githubusercontent.com/97302447/213913488-fe119591-2de7-4374-bc99-14e10f8fbe44.png)
+
+
+
+
+
+<img width="1419" alt="Screenshot 2023-01-22 at 1 55 19 PM" src="https://user-images.githubusercontent.com/97302447/213913439-f485eb38-f524-4011-ac3b-bb83806342e3.png">
+58e-c86e01886e59.png)<img width="1419" alt="Screenshot 2023-01-22 at 2 28 53 PM" src="https://user-images.githubusercontent.com/97302447/213913442-9b3b3011-2686-4206-8855-6bb2ea7cde15.png"><img width="1419" alt="Screenshot 2023-01-22 at 2 29 00 PM" src="https://user-images.githubusercontent.com/97302447/213913446-201db8f2-7c85-4e92-8fc8-4872625580ec.png">
+
+
+
+
+
+
+
+
+
+
